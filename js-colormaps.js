@@ -229,9 +229,10 @@ function evaluate_cmap(x, name, reverse) {
 function interpolated(x, colors) {
   let lo = Math.floor(x * (colors.length - 1));
   let hi = Math.ceil(x * (colors.length - 1));
-  let r = Math.round((colors[lo][0] + colors[hi][0]) / 2 * 255);
-  let g = Math.round((colors[lo][1] + colors[hi][1]) / 2 * 255);
-  let b = Math.round((colors[lo][2] + colors[hi][2]) / 2 * 255);
+  let param = ( x * (colors.length - 1) ) % 1;
+  let r = ( colors[lo][0] * (1-param) + colors[hi][0] * param ) * 255;
+  let g = ( colors[lo][1] * (1-param) + colors[hi][1] * param ) * 255;
+  let b = ( colors[lo][2] * (1-param) + colors[hi][2] * param ) * 255;
   return [r, g, b];
 }
 
